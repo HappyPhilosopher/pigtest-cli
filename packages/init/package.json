@@ -1,0 +1,26 @@
+{
+  "name": "@pigtest/init",
+  "version": "0.0.0",
+  "description": "common init",
+  "author": "painful_pig <576772193@qq.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmmirror.com/"
+  },
+  "scripts": {
+    "test": "node ./__tests__/@pigtest/init.test.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "@pigtest/command": "^0.0.0"
+  }
+}
