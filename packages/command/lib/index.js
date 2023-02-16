@@ -12,16 +12,16 @@ class Command {
 		cmd.description(this.description);
 
 		// 生命周期钩子
-		cmd.hook('preAction', (thisCommand, actionCommand) => {
-			log.info(
-				`====== ${actionCommand.name()} 命令开始执行，参数：${
-					actionCommand.args
-				}，选项：${JSON.stringify(actionCommand.opts())} ======`
-			);
-		});
-		cmd.hook('postAction', (thisCommand, actionCommand) => {
-			log.info(`====== ${actionCommand.name()} 命令执行完毕 ======`);
-		});
+		// cmd.hook('preAction', (thisCommand, actionCommand) => {
+		// 	log.verbose(
+		// 		`====== ${actionCommand.name()} 命令开始执行，参数：${
+		// 			actionCommand.args
+		// 		}，选项：${JSON.stringify(actionCommand.opts())} ======`
+		// 	);
+		// });
+		// cmd.hook('postAction', (thisCommand, actionCommand) => {
+		// 	log.verbose(`====== ${actionCommand.name()} 命令执行完毕 ======`);
+		// });
 
 		if (this.options && this.options.length > 0) {
 			this.options.forEach(option => {
