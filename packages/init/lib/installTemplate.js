@@ -25,14 +25,16 @@ export default async function installTemplate(templateInfo, opts) {
 			log.error(`当前目录下已存在 ${installDir} 文件夹`);
 			return;
 		}
+		const removeSpinner = ora('正在删除文件……').start();
 		fse.removeSync(installDir);
+		removeSpinner.stop();
 		fse.ensureDirSync(installDir);
 	} else {
 		fse.ensureDirSync(installDir);
 	}
 
-	const spinner = ora('正在拷贝文件……').start();
+	const copySpinner = ora('正在拷贝文件……').start();
 	copyFile(targetPath, template, installDir);
-	spinner.stop();
+	copySpinner.stop();
 	log.success('===>模板拷贝成功！');
 }

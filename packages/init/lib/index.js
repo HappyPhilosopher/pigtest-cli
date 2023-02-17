@@ -28,7 +28,7 @@ class InitCommand extends Command {
 	}
 
 	async action([name, opts]) {
-		log.verbose('===>init params: ', name, opts);
+		log.verbose('===>init args: ', name, opts);
 		// 1. 选择项目模板，生成项目信息
 		const templateInfo = await createTemplate(name, opts);
 		log.verbose('===>templateInfo: ', templateInfo);

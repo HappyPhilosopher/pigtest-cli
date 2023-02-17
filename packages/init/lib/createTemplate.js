@@ -1,23 +1,15 @@
 import { homedir } from 'node:os';
 import path from 'node:path';
-import { log, makeList, makeInput, getLatestVersion } from '@pigtest/utils';
+import {
+	log,
+	makeList,
+	makeInput,
+	getLatestVersion,
+	request
+} from '@pigtest/utils';
 
 const ADD_TYPE_PROJECT = 'project';
 const ADD_TYPE_PAGE = 'page';
-const ADD_TEMPLATE = [
-	{
-		name: 'vue2项目模板',
-		value: 'template-vue2',
-		npmName: '@pigtest/template-vue2',
-		version: '1.0.0'
-	},
-	{
-		name: 'vue3项目模板',
-		value: 'template-vue3',
-		npmName: '@pigtest/template-vue3',
-		version: '1.0.0'
-	}
-];
 const ADD_TYPE = [
 	{
 		name: '项目',
@@ -61,10 +53,10 @@ function getAddName() {
 /**
  * 选择项目模板
  */
-function getAddTemplate() {
+function getAddTemplate(templates) {
 	return makeList({
 		message: '请选择项目模板',
-		choices: ADD_TEMPLATE
+		choices: templates
 	});
 }
 
@@ -76,12 +68,44 @@ function makeTargetPath() {
 }
 
 /**
+ * 通过API获取项目模板
+ */
+async function getTemplateFromAPI() {
+	try {
+		const data = await request.get('/v1/projects');
+		return data;
+	} catch (e) {
+		log.error(e);
+		return null;
+	}
+}
+
+/**
+ * 选择团队
+ * @param {Array} team
+ * @returns
+ */
+function getAddTeam(team) {
+	return makeList({
+		choices: team.map(item => ({ name: item, value: item })),
+		message: '请选择团队'
+	});
+}
+
+/**
  * 创建项目模板信息
  * @param {String} name 项目名称
  * @param {Object} opts 参数选项
  * @returns 项目模板信息
  */
 export default async function createTemplate(name, opts) {
+	// 获取API项目模板
+	const ADD_TEMPLATE = await getTemplateFromAPI();
+	log.verbose('===>ADD_TEMPLATE: ', ADD_TEMPLATE);
+	if (!ADD_TEMPLATE) {
+		throw new Error('项目模板不存在');
+	}
+
 	const { type = null, template = null } = opts;
 	// 项目名称
 	let addName;
@@ -89,6 +113,10 @@ export default async function createTemplate(name, opts) {
 	let addTemplate;
 	// 选择的模板信息
 	let selectedTemplate;
+	// 团队
+	let addTeam;
+	// 团队模板
+	let teamTemplates;
 	// 项目类型
 	const addType = type || (await getAddType());
 	log.verbose('===>addType: ', addType);
@@ -96,8 +124,18 @@ export default async function createTemplate(name, opts) {
 	if (addType === ADD_TYPE_PROJECT) {
 		addName = name || (await getAddName());
 		log.verbose('===>addName: ', addName);
-		addTemplate = template || (await getAddTemplate());
+
+		// 获取团队列表并选择所在团队
+		if (!template) {
+			const teamTags = ADD_TEMPLATE.map(item => item.team);
+			const team = [...new Set(teamTags)];
+			addTeam = await getAddTeam(team);
+			log.verbose('===>addTeam: ', addTeam);
+			teamTemplates = ADD_TEMPLATE.filter(item => item.team === addTeam);
+		}
+		addTemplate = template || (await getAddTemplate(teamTemplates, addTeam));
 		log.verbose('===>addTemplate: ', addTemplate);
+		// 根据是否选择团队确定模板信息
 		selectedTemplate = ADD_TEMPLATE.find(item => item.value === addTemplate);
 		if (!selectedTemplate) {
 			throw new Error(`项目模板 ${addTemplate} 不存在！`);
