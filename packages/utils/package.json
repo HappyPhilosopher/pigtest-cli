@@ -14,8 +14,9 @@
     "lib"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmmirror.com/"
+    "registry": "https://registry.npmjs.org/"
   },
+  "repository": "git@github.com:HappyPhilosopher/pigtest-cli.git",
   "scripts": {
     "test": "node ./__tests__/@pigtest/utils.test.js"
   },

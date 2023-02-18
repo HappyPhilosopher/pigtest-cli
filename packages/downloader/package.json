@@ -14,9 +14,11 @@
     "lib"
   ],
   "publishConfig": {
-    "access": "public"
+    "registry": "https://registry.npmjs.org/"
   },
+  "repository": "git@github.com:HappyPhilosopher/pigtest-cli.git",
   "scripts": {
     "test": "node ./__tests__/@pigtest/downloader.test.js"
-  }
+  },
+  "type": "module"
 }
