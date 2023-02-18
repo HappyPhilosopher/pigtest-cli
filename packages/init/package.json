@@ -23,8 +23,10 @@
   "dependencies": {
     "@pigtest/command": "^0.0.0",
     "@pigtest/utils": "^0.0.0",
+    "ejs": "^3.1.8",
     "execa": "^7.0.0",
     "fs-extra": "^11.1.0",
+    "glob": "^8.1.0",
     "ora": "^6.1.2"
   }
 }
