@@ -1,6 +1,6 @@
 {
   "name": "@pigtest/utils",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "pigtest utils",
   "author": "painful_pig <576772193@qq.com>",
   "homepage": "",
@@ -14,7 +14,8 @@
     "lib"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "repository": "git@github.com:HappyPhilosopher/pigtest-cli.git",
   "scripts": {
