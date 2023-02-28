@@ -49,3 +49,16 @@ export function makeInput(params) {
 		type: 'input'
 	});
 }
+
+/**
+ * 密钥询问输入框
+ * @date 2023-02-28
+ * @param {Object} params
+ * @returns {Promise}
+ */
+export function makePassword(params) {
+	return make({
+		type: 'password',
+		...params
+	});
+}

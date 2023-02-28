@@ -21,5 +21,9 @@
   "scripts": {
     "test": "node ./__tests__/@pigtest/downloader.test.js"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@pigtest/command": "^0.0.1",
+    "@pigtest/utils": "^0.0.1"
+  }
 }
