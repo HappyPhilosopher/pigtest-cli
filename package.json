@@ -1,17 +1,26 @@
 {
-  "name": "root",
-  "private": true,
-  "repository": "git@github.com:HappyPhilosopher/pigtest-cli.git",
-  "workspaces": [
-    "packages/*"
-  ],
-  "devDependencies": {
-    "eslint": "^8.34.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-prettier": "^4.2.1",
-    "lerna": "^6.4.1",
-    "prettier": "^2.8.4"
-  }
+	"name": "root",
+	"private": true,
+	"repository": "git@github.com:HappyPhilosopher/pigtest-cli.git",
+	"workspaces": [
+		"packages/*"
+	],
+	"scripts": {
+		"commit": "cz"
+	},
+	"devDependencies": {
+		"cz-conventional-changelog": "^3.3.0",
+		"eslint": "^8.34.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-prettier": "^8.6.0",
+		"eslint-plugin-import": "^2.27.5",
+		"eslint-plugin-prettier": "^4.2.1",
+		"lerna": "^6.4.1",
+		"prettier": "^2.8.4"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	}
 }
