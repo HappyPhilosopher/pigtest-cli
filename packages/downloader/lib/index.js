@@ -48,9 +48,19 @@ class DownloaderCommand extends Command {
 	 * 目前只实现了单个平台搜索，未进行整合
 	 */
 	async searchGitApi() {
+		// gitee
+		// const searchResult = await this.gitApi.searchRepositories({
+		// 	q: 'vue',
+		// 	language: 'JavaScript',
+		// 	order: 'desc',
+		// 	sort: 'stars_count',
+		// 	per_page: 5,
+		// 	page: 1
+		// });
+		// console.log(searchResult);
+
 		const searchResult = await this.gitApi.searchRepositories({
-			q: 'vue',
-			language: 'JavaScript',
+			q: 'vue+language:vue',
 			order: 'desc',
 			sort: 'stars_count',
 			per_page: 5,
