@@ -1,5 +1,5 @@
 import Command from '@pigtest/command';
-import { Github, makeList, getGitPlatform, log, Gitee } from '@pigtest/utils';
+import { initGitServer } from '@pigtest/utils';
 
 class DownloaderCommand extends Command {
 	get command() {
@@ -20,27 +20,7 @@ class DownloaderCommand extends Command {
 	}
 
 	async generateGitApi() {
-		const platform =
-			getGitPlatform() ||
-			(await makeList({
-				message: '请选择Git平台',
-				choices: [
-					{ name: 'GitHub', value: 'github' },
-					{ name: 'Gittee', value: 'gittee' }
-				]
-			}));
-		log.verbose('===>git platform: ', platform);
-		let gitApi;
-
-		if (platform === 'github') {
-			gitApi = new Github();
-		} else {
-			gitApi = new Gitee();
-		}
-
-		gitApi.savePlatform(platform);
-		await gitApi.init();
-		this.gitApi = gitApi;
+		this.gitApi = await initGitServer();
 	}
 
 	/**

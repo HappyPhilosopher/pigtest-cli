@@ -6,8 +6,10 @@ import { makePassword } from '../inquirer.js';
 import log from '../log.js';
 
 const TEMP_HOME = '.pigtest';
-const TEMP_TOKEN = '.token';
+const TEMP_TOKEN = '.git_token';
 const TEMP_PLATFORM = '.git_platform';
+const TEMP_REPO_TYPE = '.git_repo_type';
+const TEMP_REPO_LOGIN_NAME = '.git_repo_login_name';
 
 /**
  * 生成 token 缓存地址
@@ -28,15 +30,75 @@ function createPlatformPath() {
 }
 
 /**
+ * 生成仓库类型缓存地址
+ * @date 2023-02-28
+ * @returns {String}
+ */
+function createRepoTypePath() {
+	return path.resolve(homedir(), TEMP_HOME, TEMP_REPO_TYPE);
+}
+
+/**
+ * 生成仓库登录名称缓存地址
+ * @date 2023-02-28
+ * @returns {String}
+ */
+function createRepoLoginNamePath() {
+	return path.resolve(homedir(), TEMP_HOME, TEMP_REPO_LOGIN_NAME);
+}
+
+/**
  * 获取缓存的 git 平台信息
  * @date 2023-02-28
  * @returns {String}
  */
 function getGitPlatform() {
-	if (fs.existsSync(createPlatformPath())) {
-		return fs.readFileSync(createPlatformPath()).toString();
+	const gitPlatformPath = createPlatformPath();
+	if (fs.existsSync(gitPlatformPath)) {
+		return fs.readFileSync(gitPlatformPath).toString();
 	}
 	return null;
+}
+
+/**
+ * 获取缓存的仓库类型
+ * @date 2023-02-28
+ * @returns {String}
+ */
+function getGitRepoType() {
+	const gitRepoType = createRepoTypePath();
+	if (fs.existsSync(gitRepoType)) {
+		return fs.readFileSync(gitRepoType).toString();
+	}
+	return null;
+}
+
+/**
+ * 获取缓存的仓库登录名称
+ * @date 2023-02-28
+ * @returns {String}
+ */
+function getGitRepoLoginName() {
+	const gitRepoLoginName = createRepoLoginNamePath();
+	if (fs.existsSync(gitRepoLoginName)) {
+		return fs.readFileSync(gitRepoLoginName).toString();
+	}
+	return null;
+}
+
+/**
+ * 清除 git 平台缓存文件、 token 缓存文件、仓库类型缓存文件、仓库登录名称缓存文件
+ * @date 2023-03-01
+ */
+function clearCache() {
+	const platformPaht = createPlatformPath();
+	const tokenPath = createTokenPath();
+	const repoTypePath = createRepoTypePath();
+	const repoLoginName = createRepoLoginNamePath();
+	fse.removeSync(platformPaht);
+	fse.removeSync(tokenPath);
+	fse.removeSync(repoTypePath);
+	fse.removeSync(repoLoginName);
 }
 
 class GitServer {
@@ -61,8 +123,49 @@ class GitServer {
 	}
 
 	savePlatform(platform) {
+		this.platform = platform;
 		fs.writeFileSync(createPlatformPath(), platform);
+	}
+
+	saveRepoType(repoType) {
+		this.repoType = repoType;
+		fs.writeFileSync(createRepoTypePath(), repoType);
+	}
+
+	saveRepoLoginName(repoLoginName) {
+		this.repoLoginName = repoLoginName;
+		fs.writeFileSync(createRepoLoginNamePath(), repoLoginName);
+	}
+
+	getUser() {
+		throw new Error('getUser must be implemented!');
+	}
+
+	getOrgs() {
+		throw new Error('getOrgs must be implemented!');
+	}
+
+	getPlatform() {
+		return this.platform;
+	}
+
+	getRepoType() {
+		return this.repoType;
+	}
+
+	getRepoLoginName() {
+		return this.repoLoginName;
+	}
+
+	createRepo() {
+		throw new Error('createRepo must be implemented!');
 	}
 }
 
-export { getGitPlatform, GitServer };
+export {
+	getGitPlatform,
+	GitServer,
+	clearCache,
+	getGitRepoType,
+	getGitRepoLoginName
+};

@@ -5,7 +5,17 @@ import getLatestVersion from './npm.js';
 import request from './request.js';
 import Github from './git/Github.js';
 import Gitee from './git/Gitee.js';
-import { getGitPlatform } from './git/GitServer.js';
+import {
+	getGitPlatform,
+	clearCache,
+	getGitRepoType,
+	getGitRepoLoginName
+} from './git/GitServer.js';
+import {
+	initGitServer,
+	initGitType,
+	createRemoteRepo
+} from './git/gitUtils.js';
 
 export {
 	log,
@@ -17,5 +27,11 @@ export {
 	Github,
 	Gitee,
 	makePassword,
-	getGitPlatform
+	getGitPlatform,
+	clearCache,
+	initGitServer,
+	initGitType,
+	getGitRepoType,
+	getGitRepoLoginName,
+	createRemoteRepo
 };
