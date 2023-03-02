@@ -1,5 +1,3 @@
-import { log } from '@pigtest/utils';
-
 class Command {
 	constructor(commandInstance) {
 		if (!commandInstance) {
@@ -27,8 +25,6 @@ class Command {
 			this.options.forEach(option => {
 				cmd.option(...option);
 			});
-		} else {
-			log.warn(`===>${this.command} 未提供 option 参数`);
 		}
 		cmd.action((...params) => {
 			this.action(params);

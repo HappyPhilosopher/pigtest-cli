@@ -103,8 +103,7 @@ async function initGitType(gitApi) {
  * @returns {any}
  */
 async function createRemoteRepo(gitApi, projectName) {
-	const res = await gitApi.createRepo(projectName);
-	console.log(res);
+	await gitApi.createRepo(projectName);
 }
 
 export { initGitServer, initGitType, createRemoteRepo };
