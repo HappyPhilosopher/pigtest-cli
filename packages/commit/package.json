@@ -31,7 +31,9 @@
   "dependencies": {
     "@pigtest/command": "^0.0.1",
     "@pigtest/utils": "^0.0.1",
+    "execa": "^7.0.0",
     "fs-extra": "^11.1.0",
+    "semver": "^7.3.8",
     "simple-git": "^3.16.1"
   }
 }
