@@ -1,39 +1,39 @@
 {
-  "name": "@pigtest/commit",
-  "version": "0.0.1",
-  "description": "pigtest commit",
-  "author": "painful_pig <576772193@qq.com>",
-  "homepage": "https://github.com/HappyPhilosopher/pigtest-cli#readme",
-  "license": "ISC",
-  "main": "lib/index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
-  "publishConfig": {
-    "registry": "https://registry.npmmirror.com/",
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HappyPhilosopher/pigtest-cli.git"
-  },
-  "scripts": {
-    "test": "node ./__tests__/@pigtest/commit.test.js"
-  },
-  "bugs": {
-    "url": "https://github.com/HappyPhilosopher/pigtest-cli/issues"
-  },
-  "type": "module",
-  "dependencies": {
-    "@pigtest/command": "^0.0.1",
-    "@pigtest/utils": "^0.0.1",
-    "execa": "^7.0.0",
-    "fs-extra": "^11.1.0",
-    "semver": "^7.3.8",
-    "simple-git": "^3.16.1"
-  }
+	"name": "@pigtest/commit",
+	"version": "0.1.0",
+	"description": "pigtest commit",
+	"author": "painful_pig <576772193@qq.com>",
+	"homepage": "https://github.com/HappyPhilosopher/pigtest-cli#readme",
+	"license": "ISC",
+	"main": "lib/index.js",
+	"directories": {
+		"lib": "lib",
+		"test": "__tests__"
+	},
+	"files": [
+		"lib"
+	],
+	"publishConfig": {
+		"registry": "https://registry.npmmirror.com/",
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/HappyPhilosopher/pigtest-cli.git"
+	},
+	"scripts": {
+		"test": "node ./__tests__/@pigtest/commit.test.js"
+	},
+	"bugs": {
+		"url": "https://github.com/HappyPhilosopher/pigtest-cli/issues"
+	},
+	"type": "module",
+	"dependencies": {
+		"@pigtest/command": "^0.1.0",
+		"@pigtest/utils": "^0.1.0",
+		"execa": "^7.0.0",
+		"fs-extra": "^11.1.0",
+		"semver": "^7.3.8",
+		"simple-git": "^3.16.1"
+	}
 }
