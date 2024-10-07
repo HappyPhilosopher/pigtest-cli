@@ -17,6 +17,7 @@ import {
 	createRemoteRepo
 } from './git/gitUtils.js';
 
+// 该注释用于测试，无其他用途
 export {
 	log,
 	isDebug,
